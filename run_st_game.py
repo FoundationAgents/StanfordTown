@@ -5,34 +5,40 @@
 
 import asyncio
 from typing import Optional
+from pathlib import Path
 
 import fire
 
-from metagpt.ext.stanford_town.roles.st_role import STRole
-from metagpt.ext.stanford_town.stanford_town import StanfordTown
-from metagpt.ext.stanford_town.utils.const import STORAGE_PATH
-from metagpt.ext.stanford_town.utils.mg_ga_transform import (
+from stanford_town.roles.st_role import STRole
+from stanford_town.stanford_town import StanfordTown
+from stanford_town.utils.const import STORAGE_PATH, TEMP_STORAGE_PATH
+from stanford_town.utils.mg_ga_transform import (
     get_reverie_meta,
     write_curr_sim_code,
     write_curr_step,
 )
-from metagpt.ext.stanford_town.utils.utils import copy_folder
-from metagpt.logs import logger
+from stanford_town.utils.utils import copy_folder
+from metagpt.core.logs import logger
 
 
 async def startup(
-    idea: str, fork_sim_code: str, sim_code: str, temp_storage_path: str, investment: float = 30.0, n_round: int = 500
+    idea: str, fork_sim_code: str, sim_code: str, temp_storage_path: Optional[str] = None, investment: float = 30.0, n_round: int = 500
 ):
     town = StanfordTown()
     logger.info("StanfordTown init environment")
 
+    if temp_storage_path:
+        temp_storage = Path(temp_storage_path)
+    else:
+        temp_storage = TEMP_STORAGE_PATH
+
     # copy `storage/{fork_sim_code}` to `storage/{sim_code}`
-    copy_folder(str(STORAGE_PATH.joinpath(fork_sim_code)), str(STORAGE_PATH.joinpath(sim_code)))
+    copy_folder(str(STORAGE_PATH.joinpath(fork_sim_code)), str(TEMP_STORAGE_PATH.joinpath(sim_code)))
 
     # get role names from `storage/{simulation_name}/reverie/meta.json` and then init roles
     reverie_meta = get_reverie_meta(fork_sim_code)
     roles = []
-    sim_path = STORAGE_PATH.joinpath(sim_code)
+    sim_path = temp_storage.joinpath(sim_code)
     sim_path.mkdir(exist_ok=True)
     for idx, role_name in enumerate(reverie_meta["persona_names"]):
         has_inner_voice = True if idx == 0 else False
@@ -45,12 +51,13 @@ async def startup(
             curr_time=reverie_meta.get("curr_time"),
             sec_per_step=reverie_meta.get("sec_per_step"),
             has_inner_voice=has_inner_voice,
+            role_storage_path=temp_storage.joinpath(f"{sim_code}/personas/{role_name}")
         )
         roles.append(role)
 
     # init temp_storage
-    write_curr_sim_code({"sim_code": sim_code}, temp_storage_path)
-    write_curr_step({"step": reverie_meta.get("step", 0)}, temp_storage_path)
+    write_curr_sim_code({"sim_code": sim_code}, temp_storage.joinpath(sim_code))
+    write_curr_step({"step": reverie_meta.get("step", 0)}, temp_storage.joinpath(sim_code))
 
     await town.hire(roles)
 
@@ -66,7 +73,7 @@ def main(
     sim_code: str,
     temp_storage_path: Optional[str] = None,
     investment: float = 30.0,
-    n_round: int = 500,
+    n_round: int = 50,
 ):
     """
     Args:

@@ -4,9 +4,9 @@
 
 import random
 
-from metagpt.environment.stanford_town.env_space import EnvObsParams, EnvObsType
-from metagpt.ext.stanford_town.actions.st_action import STAction
-from metagpt.logs import logger
+from stanford_town.environment.env_space import EnvObsParams, EnvObsType
+from stanford_town.actions.st_action import STAction
+from metagpt.core.logs import logger
 
 
 class GenActionSector(STAction):

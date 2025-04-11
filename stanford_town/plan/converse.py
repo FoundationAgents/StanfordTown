@@ -4,10 +4,10 @@
 
 from typing import Tuple
 
-from metagpt.ext.stanford_town.actions.agent_chat_sum_rel import AgentChatSumRel
-from metagpt.ext.stanford_town.actions.gen_iter_chat_utt import GenIterChatUTT
-from metagpt.ext.stanford_town.memory.retrieve import new_agent_retrieve
-from metagpt.logs import logger
+from stanford_town.actions.agent_chat_sum_rel import AgentChatSumRel
+from stanford_town.actions.gen_iter_chat_utt import GenIterChatUTT
+from stanford_town.memory.retrieve import new_agent_retrieve
+from metagpt.core.logs import logger
 
 
 async def agent_conversation(init_role: "STRole", target_role: "STRole", conv_rounds: int = 8) -> list[list[str]]:

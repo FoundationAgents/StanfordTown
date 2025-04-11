@@ -8,10 +8,10 @@ from typing import Optional
 
 from pydantic import Field, field_serializer, model_validator
 
-from metagpt.logs import logger
-from metagpt.memory.memory import Memory
-from metagpt.schema import Message
-from metagpt.utils.common import read_json_file, write_json_file
+from metagpt.core.logs import logger
+from metagpt.core.memory import Memory
+from metagpt.core.schema import Message
+from metagpt.core.utils.common import read_json_file, write_json_file
 
 
 class BasicMemory(Message):

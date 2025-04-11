@@ -7,9 +7,9 @@ from abc import abstractmethod
 from pathlib import Path
 from typing import Any, Optional, Union
 
-from metagpt.actions.action import Action
-from metagpt.ext.stanford_town.utils.const import PROMPTS_DIR
-from metagpt.logs import logger
+from metagpt.core.actions.action import Action
+from stanford_town.utils.const import PROMPTS_DIR
+from metagpt.core.logs import logger
 
 
 class STAction(Action):
@@ -72,7 +72,7 @@ class STAction(Action):
                 if self._func_validate(llm_resp, prompt):
                     return self._func_cleanup(llm_resp, prompt)
             except Exception as exp:
-                logger.warning(f"Action: {self.cls_name} _run_gpt35_max_tokens exp: {exp}")
+                logger.warning(f"Action: {self.cls_name} _run_gpt35_max_tokens exp: {exp} with prompt: {prompt}")
                 time.sleep(5)
         return self.fail_default_resp
 
@@ -109,10 +109,15 @@ class STAction(Action):
                 if self._func_validate(llm_resp, prompt):
                     return self._func_cleanup(llm_resp, prompt)
             except Exception as exp:
-                logger.warning(f"Action: {self.cls_name} _run_gpt35_wo_extra_prompt exp: {exp}")
+                logger.warning(f"Action: {self.cls_name} _run_gpt35_wo_extra_prompt exp: {exp} with prompt: {prompt}")
                 time.sleep(5)  # usually avoid `Rate limit`
         return self.fail_default_resp
 
     async def run(self, *args, **kwargs):
         """Run action"""
         raise NotImplementedError("The run method should be implemented in a subclass.")
+        # try:
+        #     self.run(*args, **kwargs)
+        # except Exception as exp:
+        #     logger.warning(f"Action: {self.cls_name} run exp: {exp} with prompt: {args}")
+        #     return self.fail_default_resp

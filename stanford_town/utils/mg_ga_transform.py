@@ -5,9 +5,9 @@
 from pathlib import Path
 from typing import Optional
 
-from metagpt.ext.stanford_town.utils.const import STORAGE_PATH, TEMP_STORAGE_PATH
-from metagpt.logs import logger
-from metagpt.utils.common import read_json_file, write_json_file
+from stanford_town.utils.const import STORAGE_PATH, TEMP_STORAGE_PATH
+from metagpt.core.logs import logger
+from metagpt.core.utils.common import read_json_file, write_json_file
 
 
 def get_reverie_meta(sim_code: str) -> dict:

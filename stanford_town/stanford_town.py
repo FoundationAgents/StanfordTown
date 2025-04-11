@@ -4,12 +4,14 @@
 
 from typing import Any, Optional
 
-from metagpt.context import Context
-from metagpt.environment import StanfordTownEnv
-from metagpt.ext.stanford_town.roles.st_role import STRole
-from metagpt.ext.stanford_town.utils.const import MAZE_ASSET_PATH
-from metagpt.logs import logger
+from metagpt.core.context import Context
+from metagpt.core.logs import logger
 from metagpt.team import Team
+
+from stanford_town.environment import StanfordTownEnv
+from stanford_town.roles.st_role import STRole
+from stanford_town.utils.const import MAZE_ASSET_PATH
+
 
 
 class StanfordTown(Team):

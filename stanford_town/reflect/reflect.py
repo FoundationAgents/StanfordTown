@@ -5,7 +5,7 @@
 import datetime
 import time
 
-from metagpt.ext.stanford_town.actions.run_reflect_action import (
+from stanford_town.actions.run_reflect_action import (
     AgentChatPoignancy,
     AgentEventPoignancy,
     AgentEventTriple,
@@ -14,9 +14,9 @@ from metagpt.ext.stanford_town.actions.run_reflect_action import (
     AgentMemoryOnConvo,
     AgentPlanThoughtOnConvo,
 )
-from metagpt.ext.stanford_town.memory.retrieve import new_agent_retrieve
-from metagpt.ext.stanford_town.utils.utils import get_embedding
-from metagpt.logs import logger
+from stanford_town.memory.retrieve import new_agent_retrieve
+from stanford_town.utils.utils import get_embedding
+from metagpt.core.logs import logger
 
 
 async def generate_focal_points(role: "STRole", n: int = 3):

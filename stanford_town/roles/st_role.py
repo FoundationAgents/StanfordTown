@@ -20,35 +20,36 @@ from typing import Optional
 
 from pydantic import ConfigDict, Field, field_validator, model_validator
 
-from metagpt.actions.add_requirement import UserRequirement
-from metagpt.environment.stanford_town.env_space import (
+from metagpt.core.actions.add_requirement import UserRequirement
+from stanford_town.environment.env_space import (
     EnvAction,
     EnvActionType,
     EnvObsParams,
     EnvObsType,
 )
-from metagpt.environment.stanford_town.stanford_town_env import StanfordTownEnv
-from metagpt.ext.stanford_town.actions.dummy_action import DummyAction, DummyMessage
-from metagpt.ext.stanford_town.actions.inner_voice_action import (
+from stanford_town.environment.stanford_town_env import StanfordTownEnv
+from stanford_town.actions.dummy_action import DummyAction, DummyMessage
+from stanford_town.actions.inner_voice_action import (
     AgentWhisperThoughtAction,
 )
-from metagpt.ext.stanford_town.actions.run_reflect_action import AgentEventTriple
-from metagpt.ext.stanford_town.memory.agent_memory import AgentMemory, BasicMemory
-from metagpt.ext.stanford_town.memory.scratch import Scratch
-from metagpt.ext.stanford_town.memory.spatial_memory import MemoryTree
-from metagpt.ext.stanford_town.plan.st_plan import plan
-from metagpt.ext.stanford_town.reflect.reflect import generate_poig_score, role_reflect
-from metagpt.ext.stanford_town.utils.const import STORAGE_PATH, collision_block_id
-from metagpt.ext.stanford_town.utils.mg_ga_transform import (
+from stanford_town.actions.run_reflect_action import AgentEventTriple
+from stanford_town.memory.agent_memory import AgentMemory, BasicMemory
+from stanford_town.memory.scratch import Scratch
+from stanford_town.memory.spatial_memory import MemoryTree
+from stanford_town.plan.st_plan import plan
+from stanford_town.reflect.reflect import generate_poig_score, role_reflect
+from stanford_town.utils.const import STORAGE_PATH, collision_block_id, TEMP_STORAGE_PATH
+from stanford_town.utils.mg_ga_transform import (
     get_role_environment,
     save_environment,
     save_movement,
 )
-from metagpt.ext.stanford_town.utils.utils import get_embedding, path_finder
-from metagpt.logs import logger
-from metagpt.roles.role import Role, RoleContext
-from metagpt.schema import Message
-from metagpt.utils.common import any_to_str
+from stanford_town.utils.utils import path_finder
+from stanford_town.utils.utils import get_embedding
+from metagpt.core.logs import logger
+from metagpt.core.roles.role import Role, RoleContext
+from metagpt.core.schema import Message
+from metagpt.core.utils.common import any_to_str
 
 
 class STRoleContext(RoleContext):

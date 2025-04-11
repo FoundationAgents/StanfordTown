@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from metagpt.const import EXAMPLE_PATH
+from metagpt.core.const import EXAMPLE_PATH
 
 ST_ROOT_PATH = Path(__file__).parent.parent
 STORAGE_PATH = EXAMPLE_PATH.joinpath("stanford_town/storage")

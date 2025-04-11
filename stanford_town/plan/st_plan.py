@@ -7,19 +7,20 @@ import math
 import random
 from typing import Tuple, Union
 
-from metagpt.ext.stanford_town.actions.decide_to_talk import DecideToTalk
-from metagpt.ext.stanford_town.actions.gen_action_details import GenActionDetails
-from metagpt.ext.stanford_town.actions.gen_daily_schedule import GenDailySchedule
-from metagpt.ext.stanford_town.actions.gen_hourly_schedule import GenHourlySchedule
-from metagpt.ext.stanford_town.actions.new_decomp_schedule import NewDecompSchedule
-from metagpt.ext.stanford_town.actions.summarize_conv import SummarizeConv
-from metagpt.ext.stanford_town.actions.task_decomp import TaskDecomp
-from metagpt.ext.stanford_town.actions.wake_up import WakeUp
-from metagpt.ext.stanford_town.memory.retrieve import new_agent_retrieve
-from metagpt.ext.stanford_town.plan.converse import agent_conversation
-from metagpt.ext.stanford_town.utils.utils import get_embedding
+from stanford_town.actions.decide_to_talk import DecideToTalk
+from stanford_town.actions.gen_action_details import GenActionDetails
+from stanford_town.actions.gen_daily_schedule import GenDailySchedule
+from stanford_town.actions.gen_hourly_schedule import GenHourlySchedule
+from stanford_town.actions.new_decomp_schedule import NewDecompSchedule
+from stanford_town.actions.summarize_conv import SummarizeConv
+from stanford_town.actions.task_decomp import TaskDecomp
+from stanford_town.actions.wake_up import WakeUp
+from stanford_town.memory.retrieve import new_agent_retrieve
+from stanford_town.plan.converse import agent_conversation
+from stanford_town.utils.utils import get_embedding
+
 from metagpt.llm import LLM
-from metagpt.logs import logger
+from metagpt.core.logs import logger
 
 
 async def plan(role: "STRole", roles: dict["STRole"], new_day: bool, retrieved: dict) -> str:

@@ -5,10 +5,9 @@
 import random
 import string
 
-from metagpt.logs import logger
+from metagpt.core.logs import logger
 
-from .st_action import STAction
-
+from stanford_town.actions.st_action import STAction
 
 def get_random_alphanumeric(i=6, j=6):
     """

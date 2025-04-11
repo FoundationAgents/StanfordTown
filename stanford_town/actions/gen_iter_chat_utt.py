@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 # @Desc   : generate_iterative_chat_utt
 
-from metagpt.environment.stanford_town.env_space import EnvObsParams, EnvObsType
-from metagpt.ext.stanford_town.actions.st_action import STAction
-from metagpt.ext.stanford_town.utils.utils import extract_first_json_dict
-from metagpt.logs import logger
+from stanford_town.environment.env_space import EnvObsParams, EnvObsType
+from stanford_town.actions.st_action import STAction
+from stanford_town.utils.utils import extract_first_json_dict
+from metagpt.core.logs import logger
 
 
 class GenIterChatUTT(STAction):

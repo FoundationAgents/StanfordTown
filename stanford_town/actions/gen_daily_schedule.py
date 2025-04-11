@@ -3,8 +3,8 @@
 # @Desc   : gen_daily_schedule
 
 
-from metagpt.ext.stanford_town.actions.st_action import STAction
-from metagpt.logs import logger
+from stanford_town.actions.st_action import STAction
+from metagpt.core.logs import logger
 
 
 class GenDailySchedule(STAction):

@@ -9,8 +9,8 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field
 
-from metagpt.logs import logger
-from metagpt.utils.common import read_json_file, write_json_file
+from metagpt.core.logs import logger
+from metagpt.core.utils.common import read_json_file, write_json_file
 
 
 class MemoryTree(BaseModel):

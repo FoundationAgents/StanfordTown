@@ -10,7 +10,7 @@ from typing import Any, Optional
 from pydantic import ConfigDict, Field, model_validator
 
 from metagpt.environment.base_env import ExtEnv, mark_as_readable, mark_as_writeable
-from metagpt.environment.stanford_town.env_space import (
+from stanford_town.environment.env_space import (
     EnvAction,
     EnvActionType,
     EnvObsParams,
@@ -19,7 +19,7 @@ from metagpt.environment.stanford_town.env_space import (
     get_action_space,
     get_observation_space,
 )
-from metagpt.utils.common import read_csv_to_list, read_json_file
+from metagpt.core.utils.common import read_csv_to_list, read_json_file
 
 
 class StanfordTownExtEnv(ExtEnv):

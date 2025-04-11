@@ -4,8 +4,8 @@
 
 import re
 
-from metagpt.ext.stanford_town.actions.st_action import STAction
-from metagpt.logs import logger
+from stanford_town.actions.st_action import STAction
+from metagpt.core.logs import logger
 
 
 # Run GPT Prompt Focal Point method

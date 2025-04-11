@@ -7,8 +7,8 @@ import datetime
 from numpy import dot
 from numpy.linalg import norm
 
-from metagpt.ext.stanford_town.memory.agent_memory import BasicMemory
-from metagpt.ext.stanford_town.utils.utils import get_embedding
+from stanford_town.memory.agent_memory import BasicMemory
+from stanford_town.utils.utils import get_embedding
 
 
 def agent_retrieve(

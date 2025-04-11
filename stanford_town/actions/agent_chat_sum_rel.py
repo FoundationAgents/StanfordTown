@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Desc   : summarize relationship in a agent chat
 
-from metagpt.ext.stanford_town.actions.st_action import STAction
-from metagpt.logs import logger
+from stanford_town.actions.st_action import STAction
+from metagpt.core.logs import logger
 
 
 class AgentChatSumRel(STAction):

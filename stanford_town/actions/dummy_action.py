@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Desc   : dummy action to make every STRole can deal DummyMessage which is caused by DummyAction
 
-from metagpt.actions import Action
-from metagpt.schema import Message
+from metagpt.core.actions import Action
+from metagpt.core.schema import Message
 
 
 class DummyAction(Action):

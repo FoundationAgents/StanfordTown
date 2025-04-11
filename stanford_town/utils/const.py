@@ -4,11 +4,10 @@
 
 from pathlib import Path
 
-from metagpt.core.const import EXAMPLE_PATH
 
 ST_ROOT_PATH = Path(__file__).parent.parent
-STORAGE_PATH = EXAMPLE_PATH.joinpath("stanford_town/storage")
-TEMP_STORAGE_PATH = EXAMPLE_PATH.joinpath("stanford_town/temp_storage")
+STORAGE_PATH = ST_ROOT_PATH.joinpath("storage")
+TEMP_STORAGE_PATH = ST_ROOT_PATH.parent.joinpath("temp_storage")
 MAZE_ASSET_PATH = ST_ROOT_PATH.joinpath("static_dirs/assets/the_ville")
 PROMPTS_DIR = ST_ROOT_PATH.joinpath("prompts")
 

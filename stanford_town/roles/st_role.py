@@ -93,7 +93,8 @@ class STRole(Role):
 
     @model_validator(mode="after")
     def validate_st_role_after(self):
-        self.role_storage_path = STORAGE_PATH.joinpath(f"{self.sim_code}/personas/{self.name}")
+        if not self.role_storage_path:
+            self.role_storage_path = TEMP_STORAGE_PATH.joinpath(f"{self.sim_code}/personas/{self.name}")
 
         self.load_from()  # load role's memory
 

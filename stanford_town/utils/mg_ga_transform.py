@@ -17,7 +17,7 @@ def get_reverie_meta(sim_code: str) -> dict:
 
 
 def save_movement(role_name: str, role_move: dict, step: int, sim_code: str, curr_time: str):
-    movement_path = STORAGE_PATH.joinpath(f"{sim_code}/movement/{step}.json")
+    movement_path = TEMP_STORAGE_PATH.joinpath(f"{sim_code}/movement/{step}.json")
     if not movement_path.parent.exists():
         movement_path.parent.mkdir(exist_ok=True)
     if movement_path.exists():
@@ -32,7 +32,7 @@ def save_movement(role_name: str, role_move: dict, step: int, sim_code: str, cur
 
 
 def save_environment(role_name: str, step: int, sim_code: str, movement: list[int]):
-    environment_path = STORAGE_PATH.joinpath(f"{sim_code}/environment/{step}.json")
+    environment_path = TEMP_STORAGE_PATH.joinpath(f"{sim_code}/environment/{step}.json")
     if not environment_path.parent.exists():
         environment_path.parent.mkdir(exist_ok=True)
     if environment_path.exists():
@@ -46,12 +46,11 @@ def save_environment(role_name: str, step: int, sim_code: str, movement: list[in
 
 
 def get_role_environment(sim_code: str, role_name: str, step: int = 0) -> dict:
-    env_path = STORAGE_PATH.joinpath(f"{sim_code}/environment/{step}.json")
+    env_path = TEMP_STORAGE_PATH.joinpath(f"{sim_code}/environment/{step}.json")
     role_env = None
     if env_path.exists():
         env_info = read_json_file(env_path)
         role_env = env_info.get(role_name, None)
-
     return role_env
 
 

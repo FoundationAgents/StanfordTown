@@ -12,42 +12,14 @@ from pathlib import Path
 from typing import Union
 
 from openai import OpenAI
+from llama_index.embeddings.openai import OpenAIEmbedding
 
 from metagpt.core.config2 import config
 from metagpt.core.logs import logger
 
 
-def read_csv_to_list(curr_file: str, header=False, strip_trail=True):
-    """
-    Reads in a csv file to a list of list. If header is True, it returns a
-    tuple with (header row, all rows)
-    ARGS:
-      curr_file: path to the current csv file.
-    RETURNS:
-      List of list where the component lists are the rows of the file.
-    """
-    logger.debug(f"start read csv: {curr_file}")
-    if not header:
-        analysis_list = []
-        with open(curr_file) as f_analysis_file:
-            data_reader = csv.reader(f_analysis_file, delimiter=",")
-            for count, row in enumerate(data_reader):
-                if strip_trail:
-                    row = [i.strip() for i in row]
-                analysis_list += [row]
-        return analysis_list
-    else:
-        analysis_list = []
-        with open(curr_file) as f_analysis_file:
-            data_reader = csv.reader(f_analysis_file, delimiter=",")
-            for count, row in enumerate(data_reader):
-                if strip_trail:
-                    row = [i.strip() for i in row]
-                analysis_list += [row]
-        return analysis_list[0], analysis_list[1:]
 
-
-def get_embedding(text, model: str = "text-embedding-ada-002"):
+def get_embedding(text): #, model: str = "text-embedding-ada-002"):
     text = text.replace("\n", " ")
     embedding = None
     if not text:
@@ -55,7 +27,7 @@ def get_embedding(text, model: str = "text-embedding-ada-002"):
     for idx in range(3):
         try:
             embedding = (
-                OpenAI(api_key=config.llm.api_key).embeddings.create(input=[text], model=model).data[0].embedding
+                OpenAI(api_key=config.embedding.api_key, base_url=config.embedding.base_url).embeddings.create(input=[text], model=config.embedding.model).data[0].embedding
             )
         except Exception as exp:
             logger.info(f"get_embedding failed, exp: {exp}, will retry.")

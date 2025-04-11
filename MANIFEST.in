@@ -1,0 +1,3 @@
+recursive-include stanford_town/prompts *.txt
+recursive-include stanford_town/static_dirs *.csv
+recursive-include stanford_town/static_dirs *.json

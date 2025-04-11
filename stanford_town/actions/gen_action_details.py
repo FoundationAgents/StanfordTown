@@ -219,21 +219,25 @@ class GenPronunciatio(STAction):
         return fs
 
     async def run(self, role: "STRole", act_desp: str):
+        self.fail_default_resp = self._func_fail_default_resp()
+
         def create_prompt_input(act_desp):
             if "(" in act_desp:
                 act_desp = act_desp.split("(")[-1].split(")")[0]
             prompt_input = [act_desp]
             return prompt_input
 
-        prompt_template = "generate_pronunciatio_v1.txt"
-        prompt_input = create_prompt_input(act_desp)
-        prompt = self.generate_prompt_with_tmpl_filename(prompt_input, prompt_template)
-        example_output = "🛁🧖‍♀️"
-        special_instruction = "The value for the output must ONLY contain the emojis."
-        self.fail_default_resp = self._func_fail_default_resp()
-        output = await self._run_gpt35(prompt, example_output, special_instruction)
-        logger.info(f"Role: {role.name} Action: {self.cls_name} output: {output}")
-        return output
+        try:
+            prompt_template = "generate_pronunciatio_v1.txt"
+            prompt_input = create_prompt_input(act_desp)
+            prompt = self.generate_prompt_with_tmpl_filename(prompt_input, prompt_template)
+            example_output = "🛁🧖‍♀️"
+            special_instruction = "The value for the output must ONLY contain the emojis."
+            output = await self._run_gpt35(prompt, example_output, special_instruction)
+            logger.info(f"Role: {role.name} Action: {self.cls_name} output: {output}")
+            return output
+        except:
+            return self.fail_default_resp
 
 
 class GenEventTriple(STAction):
